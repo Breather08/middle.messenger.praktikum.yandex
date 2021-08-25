@@ -1,0 +1,13 @@
+.auth-page 
+    .auth-card 
+        .auth-card__title
+            span Вход
+        .auth-card__fields 
+            include ../components/text-field
+            +textField('Логин')
+            +textField('Пароль', 'password')
+        .auth-card__actions
+            button.btn.block.success.bold Авторизоваться
+            .additional 
+                a(href="/login") Нет аккаунта?
+            
