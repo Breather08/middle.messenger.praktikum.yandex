@@ -1,0 +1,12 @@
+mixin chatListItem(logo, title, lastMessage)
+    .chat-list-item
+        .chat-list-item__logo
+            img(src=logo, alt="chat-list-item-logo")
+        .chat-list-item__info 
+            .header
+                .title.bold
+                    span= title
+                .time
+                    span= lastMessage.time
+            .content
+                span= lastMessage.text

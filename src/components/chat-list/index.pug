@@ -1,0 +1,11 @@
+- const logoPlaceholder = '../assets/icons/shrek.png'
+- const lastMessage = { text: 'Salamaleikum chat', time: '15:43' }
+mixin chatList()
+    .chat-list 
+        include ../chat-list-item/index
+        +chatListItem(logoPlaceholder, 'Chat item', lastMessage)
+        +chatListItem(logoPlaceholder, 'Chat item', lastMessage)
+        +chatListItem(logoPlaceholder, 'Chat item', lastMessage)
+        +chatListItem(logoPlaceholder, 'Chat item', lastMessage)
+        +chatListItem(logoPlaceholder, 'Chat item', lastMessage)
+        +chatListItem(logoPlaceholder, 'Chat item', lastMessage)
