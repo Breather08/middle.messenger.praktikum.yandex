@@ -2,10 +2,9 @@
   "name": "module-1",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "scripts": {
-    "dev": "parcel src/pages/index.pug",
-    "build": "parcel build src/pages/index.pug --public-url ./",
+    "dev": "parcel src/pages/registration/index.pug",
+    "build": "parcel build src/pages/registration/index.pug --public-url ./",
     "serve": "nodemon server.js",
     "start": "node server.js"
   },
