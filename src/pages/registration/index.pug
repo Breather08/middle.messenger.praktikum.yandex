@@ -1,22 +1,18 @@
-extends ../../layouts/default
-
-block content 
-    .auth-page 
-        .auth-card 
-            .auth-card__title
-                span Регистрация
-            .auth-card__fields 
-                include ../../components/text-field/index
-                +textField('Почта', 'email')
-                +textField('Логин')
-                +textField('Имя')
-                +textField('Фамилия', 'tel')
-                +textField('Телефон')
-                +textField('Пароль', 'password')
-                +textField('Пароль (еще раз)', 'password')
-            .auth-card__actions
-                button.btn.block.success.bold Зарегистрироваться
-                .additional 
-                    a(href="#" id="has-account-link") Уже есть аккаунт?
-    script(src="./index.js" type="module") 
+.auth-page.registration.active-page
+    .auth-card 
+        .auth-card__title
+            span Регистрация
+        .auth-card__fields 
+            include ../../components/text-field/index
+            +textField('Почта', 'email')
+            +textField('Логин')
+            +textField('Имя')
+            +textField('Фамилия', 'tel')
+            +textField('Телефон')
+            +textField('Пароль', 'password')
+            +textField('Пароль (еще раз)', 'password')
+        .auth-card__actions
+            button.btn.block.success.bold.registration-btn Зарегистрироваться
+            .additional 
+                a(href="#" id="has-account-link") Уже есть аккаунт?
             

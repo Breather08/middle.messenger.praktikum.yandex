@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel src/pages/registration/index.pug",
-    "build": "parcel build src/pages/registration/index.pug --public-url ./",
+    "dev": "parcel src/index.pug",
+    "build": "parcel build src/index.pug --public-url ./",
     "serve": "nodemon server.js",
     "start": "node server.js"
   },
