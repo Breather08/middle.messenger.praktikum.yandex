@@ -4,17 +4,17 @@ $grey: #e5e5e5;
 
 @font-face {
   font-family: "Gilroy";
-  src: local("Gilroy"), local("Gilroy-Regular"),
-    url("../fonts/gilroy-regular.ttf") format("truetype");
+  src: url("../fonts/gilroy-regular.ttf") format("truetype");
   font-display: swap;
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Gilroy Black";
-  src: local("Gilroy Black"), local("Gilroy-Regular-Black"),
-    url("../fonts/gilroy-bold.ttf") format("truetype");
+  font-family: "Gilroy";
+  src: url("../fonts/gilroy-bold.ttf") format("truetype");
   font-display: swap;
-  font-style: normal;
+  font-weight: bold;
+  font-style: bold;
 }
 
 @import "../../components/text-field/index.scss";
@@ -32,10 +32,11 @@ $grey: #e5e5e5;
 body {
   background-color: $background;
   font-family: "Gilroy";
+  font-weight: normal;
 }
 
 .bold {
-  font-family: "Gilroy Black";
+  font-weight: bold;
 }
 
 .btn {
@@ -46,10 +47,10 @@ body {
   font-size: 18px;
   font-family: "Gilroy";
   transition: 0.1s;
-  &.block {
+  &_block {
     width: 100%;
   }
-  &.success {
+  &_success {
     background-color: $success;
   }
   &:active {
