@@ -1,6 +1,8 @@
-$background: #feffe2;
-$success: #358a59;
-$grey: #e5e5e5;
+@import "../../components/text-field/index.scss";
+@import "../../components/chat-list/index.scss";
+@import "../../pages/chat/index.scss";
+@import "../../pages/login/index.scss";
+@import "../../pages/registration/index.scss";
 
 @font-face {
   font-family: "Gilroy";
@@ -9,6 +11,7 @@ $grey: #e5e5e5;
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Gilroy";
   src: url("../fonts/gilroy-bold.ttf") format("truetype");
@@ -17,11 +20,10 @@ $grey: #e5e5e5;
   font-style: bold;
 }
 
-@import "../../components/text-field/index.scss";
-@import "../../components/chat-list/index.scss";
-@import "../../pages/chat/index.scss";
-@import "../../pages/login/index.scss";
-@import "../../pages/registration/index.scss";
+$background: #feffe2;
+$success: #358a59;
+$grey: #e5e5e5;
+$default-font: "Gilroy";
 
 * {
   margin: 0;
@@ -31,7 +33,7 @@ $grey: #e5e5e5;
 
 body {
   background-color: $background;
-  font-family: "Gilroy";
+  font-family: $default-font;
   font-weight: normal;
 }
 
@@ -45,22 +47,26 @@ body {
   height: 55px;
   border-radius: 10px;
   font-size: 18px;
-  font-family: "Gilroy";
+  font-family: inherit;
   transition: 0.1s;
+
   &_block {
     width: 100%;
   }
+
   &_success {
     background-color: $success;
   }
+
   &:active {
     transform: scale(0.992);
   }
+
   color: white;
 }
 
 .auth-card {
-  box-shadow: 0px 3px 8px -1px rgba(34, 60, 80, 0.2);
+  box-shadow: 0 3px 8px -1px rgba(34, 60, 80, 0.2);
   padding: 30px 50px;
   width: 550px;
   border-radius: 12px;
@@ -68,20 +74,25 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   &__title {
     font-size: 35px;
     font-weight: 500;
     margin: 30px 0 50px;
   }
+
   &__fields {
     width: 100%;
   }
+
   &__actions {
     padding: 30px 0 0 0;
     width: 100%;
+
     .additional {
       padding-top: 15px;
       text-align: center;
+
       a {
         text-decoration: none;
         color: $success;
