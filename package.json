@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "parcel src/index.pug",
     "build": "parcel build src/index.pug --public-url ./",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +19,20 @@
     "@parcel/transformer-image": "^2.0.0-rc.0",
     "@parcel/transformer-pug": "^2.0.0-rc.0",
     "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
     "cssnano": "^5.0.8",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-plugin-import": "^2.24.2",
     "parcel": "^2.0.0-rc.0",
     "postcss": "^8.3.6",
     "pug": "^3.0.2",
-    "sass": "^1.38.0"
+    "sass": "^1.38.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "typescript": "^4.4.2"
   },
   "engines": {
     "node": ">=12.0.0"
