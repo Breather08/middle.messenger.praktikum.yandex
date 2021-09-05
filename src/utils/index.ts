@@ -1,1 +1,3 @@
-export * from './setActivePage';
+import setActivePage from './setActivePage';
+
+export default setActivePage;

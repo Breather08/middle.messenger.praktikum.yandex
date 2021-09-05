@@ -1,13 +1,9 @@
+@import "./variables.scss";
 @import "../../components/text-field/index.scss";
 @import "../../components/chat-list/index.scss";
 @import "../../pages/chat/index.scss";
 @import "../../pages/login/index.scss";
 @import "../../pages/registration/index.scss";
-
-$background: #feffe2;
-$success: #358a59;
-$grey: #e5e5e5;
-$default-font: "Gilroy";
 
 @font-face {
   font-family: "Gilroy";

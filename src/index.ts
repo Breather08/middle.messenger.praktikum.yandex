@@ -1,5 +1,5 @@
 import './assets/styles/global.scss';
-import * as utils from './utils/index';
+import setActivePage from './utils/setActivePage';
 
 // Page wrappers
 const loginPageWrapper = document.querySelector('.login');
@@ -14,17 +14,17 @@ const noAccountLink = document.querySelector('#no-account-link');
 const logout = document.querySelector('#logout');
 
 loginBtn?.addEventListener('click', () => {
-  utils.setActivePage(chatPageWrapper);
+  setActivePage(chatPageWrapper);
 });
 registrationBtn?.addEventListener('click', () => {
-  utils.setActivePage(chatPageWrapper);
+  setActivePage(chatPageWrapper);
 });
 hasAccountLink?.addEventListener('click', () => {
-  utils.setActivePage(loginPageWrapper);
+  setActivePage(loginPageWrapper);
 });
 noAccountLink?.addEventListener('click', () => {
-  utils.setActivePage(registrationPageWrapper);
+  setActivePage(registrationPageWrapper);
 });
 logout?.addEventListener('click', () => {
-  utils.setActivePage(loginPageWrapper);
+  setActivePage(loginPageWrapper);
 });

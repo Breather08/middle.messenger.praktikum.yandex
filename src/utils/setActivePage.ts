@@ -1,11 +1,6 @@
-// const setActivePage: (activePage: object) => void = (activePage: number) => {
-//   document.querySelector('.active-page')?.classList.remove('active-page');
-//   activePage.classList.add('active-page');
-// };
-
-function setActivePage(activePage: Element) {
+function setActivePage(activePage: Element | null) {
   document.querySelector('.active-page')?.classList.remove('active-page');
-  activePage.classList.add('active-page');
+  activePage?.classList.add('active-page');
 }
 
 export default setActivePage;
