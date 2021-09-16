@@ -6,7 +6,7 @@
 @import "../../pages/registration/index.scss";
 
 @font-face {
-  font-family: "Gilroy";
+  font-family: $default-font;
   src: url("../fonts/gilroy-regular.ttf") format("truetype");
   font-display: swap;
   font-weight: normal;
@@ -14,7 +14,7 @@
 }
 
 @font-face {
-  font-family: "Gilroy";
+  font-family: $default-font;
   src: url("../fonts/gilroy-bold.ttf") format("truetype");
   font-display: swap;
   font-weight: bold;

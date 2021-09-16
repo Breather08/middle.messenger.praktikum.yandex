@@ -1,22 +1,32 @@
 /* eslint-disable class-methods-use-this */
-// import { Block } from '../../utils/index';
+import Block from '../../utils/block';
+import Input from './input';
+import compile from '../../utils/compile';
+import tmpl from './index.pug';
 
-// class TextField extends Block {
-//   constructor(props = {}) {
-//     super('div', props);
-//   }
+export default class TextField extends Block {
+  constructor(props: {
+    label: string;
+    inputAttrs?: Record<string, string>;
+    events?: Record<string, (e?: Event) => void>;
+    attrs?: Record<string, string>;
+  }) {
+    super('div', props);
+  }
 
-//   render() {
-//     return `h1 ${this.props.text}`;
-//   }
-// }
+  render() {
+    const input = new Input({
+      attrs: this.props.inputAttrs,
+      events: {
+        input(e: InputEvent) {
+          console.log(e.target);
+        },
+      },
+    });
 
-// export function render(query: string, block: Block) {
-//   const root = document.querySelector(query);
-//   root?.appendChild(block.getContent());
-//   return root;
-// }
-
-// export const textField = new TextField({
-//   text: 'Click me',
-// });
+    return compile(tmpl, {
+      label: this.props.label,
+      input,
+    });
+  }
+}

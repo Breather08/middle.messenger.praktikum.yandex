@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel src/index.pug",
+    "dev": "parcel src/index.html",
     "build": "parcel build src/index.pug --public-url ./",
     "start": "node server.ts",
     "lint": "eslint . --ext .ts"
@@ -14,7 +14,8 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@parcel/transformer-image": "^2.0.0-rc.0",
@@ -28,6 +29,7 @@
     "eslint-config-airbnb-typescript": "^14.0.0",
     "eslint-plugin-import": "^2.24.2",
     "parcel": "^2.0.0-rc.0",
+    "parcel-transformer-pug-precompile": "^1.0.6",
     "postcss": "^8.3.6",
     "sass": "^1.38.0",
     "stylelint": "^13.13.1",

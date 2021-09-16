@@ -1,30 +1,15 @@
 import './assets/styles/global.scss';
-import setActivePage from './utils/setActivePage';
+import LoginPage from './pages/login/index';
+import { Block } from './utils';
 
-// Page wrappers
-const loginPageWrapper = document.querySelector('.login');
-const registrationPageWrapper = document.querySelector('.registration');
-const chatPageWrapper = document.querySelector('.chat-page');
+function render(query: string, block: Block) {
+  const root = document.querySelector(query);
 
-// Links
-const registrationBtn = document.querySelector('.btn__registration');
-const loginBtn = document.querySelector('.btn__login');
-const hasAccountLink = document.querySelector('#has-account-link');
-const noAccountLink = document.querySelector('#no-account-link');
-const logout = document.querySelector('#logout');
+  root?.append(block.element);
 
-loginBtn?.addEventListener('click', () => {
-  setActivePage(chatPageWrapper);
-});
-registrationBtn?.addEventListener('click', () => {
-  setActivePage(chatPageWrapper);
-});
-hasAccountLink?.addEventListener('click', () => {
-  setActivePage(loginPageWrapper);
-});
-noAccountLink?.addEventListener('click', () => {
-  setActivePage(registrationPageWrapper);
-});
-logout?.addEventListener('click', () => {
-  setActivePage(loginPageWrapper);
-});
+  return root;
+}
+
+const loginPage = new LoginPage();
+
+render('body', loginPage);

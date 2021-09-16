@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import pug from 'pug';
-import EventBus from './eventBus';
+import { v4 as makeUUID } from 'uuid';
+import { EventBus } from './eventBus';
 
-type Meta = {
+type Meta<P = any> = {
   tagName: string;
-  props: unknown;
+  props: P;
 };
 
-export default class Block {
+export default class Block<P = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -16,22 +17,24 @@ export default class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  private privateElement: HTMLElement;
+  id = makeUUID();
 
-  private meta: Meta;
+  private readonly meta: Meta;
 
-  public props = {};
+  protected privateElement: HTMLElement;
+
+  protected readonly props: P;
 
   public eventBus: () => EventBus;
 
-  constructor(tagName: string = 'div', props = {}) {
+  constructor(tagName: string = 'div', props?: P) {
     const eventBus = new EventBus();
     this.meta = {
       tagName,
       props,
     };
 
-    this.props = this.makePropsProxy(props);
+    this.props = this.makePropsProxy(props || ({} as P));
 
     this.eventBus = () => eventBus;
 
@@ -53,17 +56,24 @@ export default class Block {
 
   init() {
     this.createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+
+    if (this.props?.attrs) {
+      Object.keys(this.props.attrs).forEach((key) => {
+        this.element.setAttribute(key, this.props.attrs[key]);
+      });
+    }
+
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
   }
 
-  private onComponentMount() {
-    this.componentDidMount();
+  private onComponentMount(props: P) {
+    this.componentDidMount(props);
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  componentDidMount(oldProps = {}) {}
+  componentDidMount(oldProps: P) {}
 
-  private onComponentUpdate(oldProps = {}, newProps = {}) {
+  private onComponentUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -71,11 +81,11 @@ export default class Block {
     this.onRender();
   }
 
-  componentDidUpdate(oldProps = {}, newProps = {}): boolean {
+  componentDidUpdate(oldProps: P, newProps: P): boolean {
     return true;
   }
 
-  setProps = (nextProps = {}) => {
+  setProps = (nextProps: P) => {
     if (!nextProps) {
       return;
     }
@@ -87,44 +97,72 @@ export default class Block {
     return this.privateElement;
   }
 
+  private addEvents() {
+    const { events } = this.props as any;
+
+    if (!events) {
+      return;
+    }
+
+    Object.keys(events).forEach((eventName) => {
+      this.privateElement.addEventListener(eventName, events[eventName]);
+    });
+  }
+
+  private removeEvents() {
+    const { events } = this.props as any;
+
+    if (!events) {
+      return;
+    }
+
+    Object.keys(events).forEach((eventName) => {
+      this.privateElement.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
   private onRender() {
-    const block = this.render();
-    this.privateElement.innerHTML = pug.render(block);
+    const fragment = this.render();
+
+    this.removeEvents();
+
+    this.privateElement.innerHTML = '';
+
+    this.privateElement.append(fragment);
+
+    this.addEvents();
   }
 
-  render() {
-    return '';
+  render(): DocumentFragment {
+    return new DocumentFragment();
   }
 
-  getContent() {
+  getContent(): HTMLElement {
     return this.element;
   }
 
-  private makePropsProxy(props = {}) {
+  private makePropsProxy(props: P): P {
     const self = this;
     const oldProps = { ...props };
-    return new Proxy(props, {
-      get(target, prop: string) {
+    return new Proxy(props as unknown as object, {
+      get(target: Record<string, unknown>, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target, prop: string, value) {
+      set(target: Record<string, unknown>, prop: string, value: unknown) {
         // eslint-disable-next-line no-param-reassign
         target[prop] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
         return true;
       },
       deleteProperty() {
         throw new Error('Нет доступа');
       },
-    });
+    }) as unknown as P;
   }
 
   createDocumentElement(tagName: string): HTMLElement {
-    // Можно сделать метод, который через фрагменты в цикле создает сразу несколько блоков
     return document.createElement(tagName);
   }
 
@@ -136,35 +174,3 @@ export default class Block {
     this.getContent()!.style.display = 'none';
   }
 }
-
-// class Button extends Block {
-//   constructor(props) {
-//     // Создаём враппер дом-элемент button
-//     super('button', props);
-//   }
-
-//   render() {
-//     // В проекте должен быть ваш собственный шаблонизатор
-//     return `<div>${this.props.text}</div>`;
-//   }
-// }
-
-// function render(query, block) {
-//   const root = document.querySelector(query);
-//   root.appendChild(block.getContent());
-//   return root;
-// }
-
-// const button = new Button({
-//   text: 'Click me',
-// });
-
-// // app — это class дива в корне DOM
-// render('.app', button);
-
-// // Через секунду контент изменится сам, достаточно обновить пропсы
-// setTimeout(() => {
-//   button.setProps({
-//     text: 'Click me, please',
-//   });
-// }, 1000);

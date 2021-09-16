@@ -1,15 +1,16 @@
 .chat-page {
-  display: none;
   &.active-page {
     display: block;
   }
 }
+
 .sidebar {
   width: 380px;
   height: 100vh;
   background: white;
   padding: 0 20px;
   border-right: 1px solid $grey;
+
   hr {
     border: 1px solid $grey;
   }
@@ -20,6 +21,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
+
   .sidebar__header-menu {
     .img-container {
       width: 50px;
@@ -30,20 +32,24 @@
       align-items: center;
       border-radius: 50%;
       transition: 0.15s ease-in-out;
+
       img {
         height: 28px;
         opacity: 0.5;
       }
+
       &:hover {
         background: rgb(235, 235, 235);
       }
     }
   }
+
   .sidebar__header-search {
     .search {
       width: 100%;
+
       input {
-        font-family: "Gilroy";
+        font-family: $default-font;
         height: 35px;
         width: 100%;
         border-radius: 8px;
@@ -53,6 +59,7 @@
         font-size: 16px;
         outline: none;
         transition: 0.2s;
+
         &:focus {
           outline: $success;
           background: white;

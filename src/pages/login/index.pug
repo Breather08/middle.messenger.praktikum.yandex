@@ -3,11 +3,10 @@
         .auth-card__title
             span Вход
         .auth-card__fields 
-            include ../../components/text-field/index
-            +textField('Логин')
-            +textField('Пароль', 'password')
+            | !{usernameTextField}
+            | !{passwordTextField}
         .auth-card__actions
-            button.btn.btn_block.btn_success.btn_bold.btn__login Авторизоваться
+            | !{button}
             .additional 
                 a(href="#" id="no-account-link") Нет аккаунта?
                 
