@@ -3,7 +3,19 @@ import { Block } from '../../utils/index';
 import Button from '../../components/button';
 import TextField from '../../components/text-field';
 import compile from '../../utils/compile';
+import { Rules } from '../../types/rules';
 import tmpl from './index.pug';
+
+const rules: Rules = {
+  empty: {
+    text: 'Это обязательное поле',
+    fn: (v: string) => !!v,
+  },
+  length: {
+    text: 'Поле может содержать от 3 до 20 символов',
+    fn: (v: string) => /^\w{3,20}$/.test(v),
+  },
+};
 
 export default class LoginPage extends Block {
   constructor() {
@@ -29,6 +41,7 @@ export default class LoginPage extends Block {
         type: 'text',
         id: 'login-username',
       },
+      rules: [rules.empty, rules.length],
     });
 
     const passwordTextField = new TextField({
@@ -37,6 +50,7 @@ export default class LoginPage extends Block {
         type: 'password',
         id: 'login-password',
       },
+      rules: [rules.empty, rules.length],
     });
 
     return compile(tmpl, {

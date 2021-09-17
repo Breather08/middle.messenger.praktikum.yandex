@@ -57,12 +57,6 @@ export default class Block<P = any> {
   init() {
     this.createResources();
 
-    if (this.props?.attrs) {
-      Object.keys(this.props.attrs).forEach((key) => {
-        this.element.setAttribute(key, this.props.attrs[key]);
-      });
-    }
-
     this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
   }
 
@@ -127,6 +121,12 @@ export default class Block<P = any> {
     this.removeEvents();
 
     this.privateElement.innerHTML = '';
+
+    if (this.props?.attrs) {
+      Object.keys(this.props.attrs).forEach((key) => {
+        this.privateElement.setAttribute(key, this.props.attrs[key]);
+      });
+    }
 
     this.privateElement.append(fragment);
 
