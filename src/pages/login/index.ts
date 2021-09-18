@@ -29,7 +29,7 @@ export default class LoginPage extends Block {
         id: 'login-username',
       },
       rules: [
-        rules.empty(),
+        rules.nonEmpty(),
         rules.noWhiteSpace(),
         rules.length(3, 20),
         rules.containsWord(),
@@ -44,7 +44,7 @@ export default class LoginPage extends Block {
         id: 'login-password',
       },
       rules: [
-        rules.empty(),
+        rules.nonEmpty(),
         rules.noWhiteSpace(),
         rules.length(8, 40),
         rules.containsWord(),

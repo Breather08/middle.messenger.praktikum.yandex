@@ -1,5 +1,5 @@
 import './assets/styles/global.scss';
-import LoginPage from './pages/login/index';
+import RegistrationPage from './pages/registration/index';
 import { Block } from './utils';
 
 function render(query: string, block: Block) {
@@ -10,6 +10,6 @@ function render(query: string, block: Block) {
   return root;
 }
 
-const loginPage = new LoginPage();
+const loginPage = new RegistrationPage();
 
 render('body', loginPage);

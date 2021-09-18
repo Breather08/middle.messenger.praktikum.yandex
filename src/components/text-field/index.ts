@@ -1,15 +1,16 @@
 /* eslint-disable class-methods-use-this */
-import Block from '../../utils/block';
 import Input from './input';
 import Message from './message';
-import compile from '../../utils/compile';
 import { Rule } from '../../types/rules';
+import { EventBus, compile, Block } from '../../utils/index';
 import tmpl from './index.pug';
 
 export default class TextField extends Block {
   constructor(props: {
     label: string;
+    localEventBus?: EventBus;
     rules?: Array<Rule>;
+    mask?: (val: string) => string;
     message?: string;
     inputAttrs?: Record<string, string>;
     events?: Record<string, (e?: Event) => void>;
@@ -20,11 +21,7 @@ export default class TextField extends Block {
 
   render() {
     const { rules } = this.props;
-
-    const data = {
-      inputModel: this.props.inputAttrs.value,
-      message: this.props.message,
-    };
+    const self = this;
 
     const message = new Message({
       content: '',
@@ -35,7 +32,10 @@ export default class TextField extends Block {
       events: {
         input(e: InputEvent) {
           const target = e.target as HTMLInputElement;
-          data.inputModel = target.value;
+          if (self.props.mask) {
+            target.value = self.props.mask(target.value);
+          }
+          self.props.localEventBus.emit('test', 'test');
         },
         focus() {
           message.setProps({

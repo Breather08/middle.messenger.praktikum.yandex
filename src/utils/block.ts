@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable class-methods-use-this */
-import pug from 'pug';
 import { v4 as makeUUID } from 'uuid';
 import { EventBus } from './eventBus';
 
@@ -54,7 +53,7 @@ export default class Block<P = any> {
     this.privateElement = this.createDocumentElement(tagName);
   }
 
-  init() {
+  private init() {
     this.createResources();
 
     this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
