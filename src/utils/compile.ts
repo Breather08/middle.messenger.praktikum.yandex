@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { Block } from './index';
+import Block from './block';
 
 export default function compile(tmpl: (ctx: any) => string, props: any): DocumentFragment {
   const fragment = document.createElement('template');

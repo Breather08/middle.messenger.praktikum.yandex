@@ -1,21 +1,8 @@
 /* eslint-disable class-methods-use-this */
-import { Block } from '../../utils/index';
+import { Block, compile, rules } from '../../utils/index';
 import Button from '../../components/button';
 import TextField from '../../components/text-field';
-import compile from '../../utils/compile';
-import { Rules } from '../../types/rules';
 import tmpl from './index.pug';
-
-const rules: Rules = {
-  empty: {
-    text: 'Это обязательное поле',
-    fn: (v: string) => !!v,
-  },
-  length: {
-    text: 'Поле может содержать от 3 до 20 символов',
-    fn: (v: string) => /^\w{3,20}$/.test(v),
-  },
-};
 
 export default class LoginPage extends Block {
   constructor() {
@@ -41,7 +28,13 @@ export default class LoginPage extends Block {
         type: 'text',
         id: 'login-username',
       },
-      rules: [rules.empty, rules.length],
+      rules: [
+        rules.empty(),
+        rules.noWhiteSpace(),
+        rules.length(3, 20),
+        rules.containsWord(),
+        rules.noSpecChars('-_'),
+      ],
     });
 
     const passwordTextField = new TextField({
@@ -50,7 +43,13 @@ export default class LoginPage extends Block {
         type: 'password',
         id: 'login-password',
       },
-      rules: [rules.empty, rules.length],
+      rules: [
+        rules.empty(),
+        rules.noWhiteSpace(),
+        rules.length(8, 40),
+        rules.containsWord(),
+        rules.noSpecChars(),
+      ],
     });
 
     return compile(tmpl, {

@@ -3,13 +3,13 @@ import Block from '../../utils/block';
 import Input from './input';
 import Message from './message';
 import compile from '../../utils/compile';
-import { RuleParams } from '../../types/rules';
+import { Rule } from '../../types/rules';
 import tmpl from './index.pug';
 
 export default class TextField extends Block {
   constructor(props: {
     label: string;
-    rules?: Array<RuleParams>;
+    rules?: Array<Rule>;
     message?: string;
     inputAttrs?: Record<string, string>;
     events?: Record<string, (e?: Event) => void>;
@@ -48,14 +48,11 @@ export default class TextField extends Block {
             return;
           }
           const nonValidRule = rules.find(
-            (rule: RuleParams): boolean => rule.fn(target.value) !== true,
+            (rule: Rule): boolean => rule.fn(target.value) !== true,
           );
           if (nonValidRule) {
             message.setProps({
               content: nonValidRule.text,
-              attrs: {
-                class: 'show',
-              },
             });
           }
         },

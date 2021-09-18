@@ -1,6 +1,6 @@
-export type Rule = (v: string) => boolean;
-export type RuleParams = {
+export type Rule = {
   text: string;
-  fn: Rule;
+  fn: (v: string) => boolean;
 };
+export type RuleParams = <T>(...params: T[]) => Rule;
 export type Rules = Record<string, RuleParams>;

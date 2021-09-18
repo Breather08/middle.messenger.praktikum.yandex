@@ -122,9 +122,10 @@ export default class Block<P = any> {
 
     this.privateElement.innerHTML = '';
 
-    if (this.props?.attrs) {
-      Object.keys(this.props.attrs).forEach((key) => {
-        this.privateElement.setAttribute(key, this.props.attrs[key]);
+    const { attrs } = this.props as any;
+    if (attrs) {
+      Object.keys(attrs).forEach((key) => {
+        this.privateElement.setAttribute(key, attrs[key]);
       });
     }
 
