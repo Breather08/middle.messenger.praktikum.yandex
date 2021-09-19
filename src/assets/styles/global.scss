@@ -37,6 +37,14 @@ body {
   font-weight: bold;
 }
 
+.d-flex {
+  display: flex;
+
+  &.align-center {
+    align-items: center;
+  }
+}
+
 .btn {
   border: none;
   outline: none;

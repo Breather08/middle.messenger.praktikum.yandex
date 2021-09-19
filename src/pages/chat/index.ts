@@ -4,10 +4,10 @@ import Button from '../../components/button';
 import TextField from '../../components/text-field';
 import tmpl from './index.pug';
 
-export default class LoginPage extends Block {
+export default class ChatPage extends Block {
   constructor() {
     super('div');
-    this.element.classList.add('auth-page__login d-flex align-center');
+    this.element.classList.add('chat-page');
   }
 
   render() {

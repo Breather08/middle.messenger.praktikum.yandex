@@ -1,5 +1,7 @@
-.registration-page {
-  &.active-page {
-    display: block;
-  }
+.auth-page__registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }

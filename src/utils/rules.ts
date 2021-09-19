@@ -20,6 +20,10 @@ const rules: Rules = {
       return regx.test(v);
     },
   }),
+  matchingPasswords: (password) => ({
+    text: 'Пароли должны совпадать',
+    fn: (v) => v === String(password),
+  }),
   nonEmpty: () => ({
     text: 'Это обязательное поле',
     fn: (v: string) => !!v,
@@ -31,10 +35,6 @@ const rules: Rules = {
   noWhiteSpace: () => ({
     text: 'Поле не может содержать пробелы',
     fn: (v) => !/\s/.test(v),
-  }),
-  matchingPasswords: (password) => ({
-    text: 'Пароли должны совпадать',
-    fn: (v) => v === String(password),
   }),
   validEmail: () => ({
     text: 'Почта должна соответсвовать шаблону: emailaddress@example.com',

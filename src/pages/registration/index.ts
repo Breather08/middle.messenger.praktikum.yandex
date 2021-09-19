@@ -7,13 +7,18 @@ import tmpl from './index.pug';
 export default class RegistrationPage extends Block {
   constructor() {
     super('div');
-
-    this.eventBus().on('test', (payload) => {
-      console.log('Payload', payload);
-    });
+    this.element.classList.add('auth-page__registration');
   }
 
   render() {
+    const formData: Record<string, { value: string; isValid: boolean }> = {};
+    let formError = '';
+
+    this.eventBus().on('input', (payload) => {
+      const { name, value, isValid } = payload[0];
+      formData[name] = { value, isValid };
+    });
+
     const button = new Button({
       content: 'Авторизоваться',
       attrs: {
@@ -21,14 +26,26 @@ export default class RegistrationPage extends Block {
       },
       events: {
         click() {
-          console.log('click');
+          const formEntries = Object.values(formData);
+          if (formEntries.length < 7) {
+            formError = 'Заполните все поля';
+            console.log(formError);
+            return;
+          }
+          formEntries.forEach((params) => {
+            if (params.isValid) {
+              formError = 'Убедитесь что поля заполнены верно';
+            }
+          });
+          console.log(formError);
         },
       },
     });
 
     const usernameTextField = new TextField({
       label: 'Логин',
-      localEventBus: this.eventBus(),
+      name: 'username',
+      parentEventBus: this.eventBus(),
       inputAttrs: {
         type: 'text',
         autocomplete: 'off',
@@ -46,6 +63,8 @@ export default class RegistrationPage extends Block {
 
     const emailTextField = new TextField({
       label: 'Почта',
+      name: 'email',
+      parentEventBus: this.eventBus(),
       inputAttrs: {
         type: 'email',
         autocomplete: 'off',
@@ -57,6 +76,8 @@ export default class RegistrationPage extends Block {
 
     const firstNameTextField = new TextField({
       label: 'Имя',
+      name: 'firstName',
+      parentEventBus: this.eventBus(),
       inputAttrs: {
         type: 'text',
         autocomplete: 'off',
@@ -68,6 +89,8 @@ export default class RegistrationPage extends Block {
 
     const lastNameTextField = new TextField({
       label: 'Фамилия',
+      name: 'lastName',
+      parentEventBus: this.eventBus(),
       inputAttrs: {
         type: 'text',
         autocomplete: 'off',
@@ -79,6 +102,8 @@ export default class RegistrationPage extends Block {
 
     const phoneTextField = new TextField({
       label: 'Телефон',
+      name: 'phone',
+      parentEventBus: this.eventBus(),
       inputAttrs: {
         type: 'tel',
         autocomplete: 'off',
@@ -91,8 +116,10 @@ export default class RegistrationPage extends Block {
 
     const passwordTextField = new TextField({
       label: 'Пароль',
+      name: 'password',
+      parentEventBus: this.eventBus(),
       inputAttrs: {
-        type: 'pasword',
+        type: 'password',
         autocomplete: 'off',
         name: 'password',
         id: 'registration-password',
@@ -109,6 +136,8 @@ export default class RegistrationPage extends Block {
 
     const passwordRepeatTextField = new TextField({
       label: 'Повторите пароль',
+      name: 'passwordRepeat',
+      parentEventBus: this.eventBus(),
       inputAttrs: {
         type: 'password',
         autocomplete: 'off',
@@ -122,6 +151,7 @@ export default class RegistrationPage extends Block {
         rules.containsWord(),
         rules.noSpecChars(),
         rules.hasCapitalLetterAndNumber(),
+        rules.matchingPasswords(formData.password),
       ],
     });
 

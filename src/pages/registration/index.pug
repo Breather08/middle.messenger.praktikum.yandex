@@ -1,17 +1,19 @@
-.auth-page.registration
-    .auth-card 
-        .auth-card__title
-            span Регистрация
-        .auth-card__fields 
-            | !{emailTextField}
-            | !{usernameTextField}
+.auth-card 
+    .auth-card__title
+        span Регистрация
+    .auth-card__fields 
+        div.d-flex.align-center
             | !{firstNameTextField}
             | !{lastNameTextField}
+        | !{emailTextField}
+        div.d-flex.align-center
             | !{phoneTextField}
+            | !{usernameTextField}
+        div.d-flex.align-center
             | !{passwordTextField}
             | !{passwordRepeatTextField}
-        .auth-card__actions
-            | !{button}
-            .additional
-                a(href="#" id="has-account-link") Уже есть аккаунт?
+    .auth-card__actions
+        | !{button}
+        .additional
+            a(href="#" id="has-account-link") Уже есть аккаунт?
             

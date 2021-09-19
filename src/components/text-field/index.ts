@@ -1,15 +1,30 @@
 /* eslint-disable class-methods-use-this */
 import Input from './input';
-import Message from './message';
 import { Rule } from '../../types/rules';
 import { EventBus, compile, Block } from '../../utils/index';
 import tmpl from './index.pug';
 
+const findByClassList = (arr: NodeList, className: string): Node | undefined =>
+  Array.from(arr).find((item: HTMLElement) =>
+    item.classList.contains(className),
+  );
+
 export default class TextField extends Block {
+  labelDOM = findByClassList(
+    this.element.childNodes,
+    'text-field__label',
+  ) as HTMLElement;
+
+  messageDOM = findByClassList(
+    this.element.childNodes,
+    'text-field__message',
+  ) as HTMLElement;
+
   constructor(props: {
     label: string;
-    localEventBus?: EventBus;
-    rules?: Array<Rule>;
+    name: string;
+    parentEventBus: EventBus;
+    rules?: Rule[];
     mask?: (val: string) => string;
     message?: string;
     inputAttrs?: Record<string, string>;
@@ -17,15 +32,12 @@ export default class TextField extends Block {
     attrs?: Record<string, string>;
   }) {
     super('div', props);
+    this.element.classList.add('text-field');
   }
 
   render() {
     const { rules } = this.props;
     const self = this;
-
-    const message = new Message({
-      content: '',
-    });
 
     const input = new Input({
       attrs: this.props.inputAttrs,
@@ -35,25 +47,25 @@ export default class TextField extends Block {
           if (self.props.mask) {
             target.value = self.props.mask(target.value);
           }
-          self.props.localEventBus.emit('test', 'test');
         },
         focus() {
-          message.setProps({
-            content: '',
-          });
+          const message = self.messageDOM;
+          message.innerText = '';
         },
         blur(e) {
-          const target = e.target as HTMLInputElement;
+          const { parentEventBus, name } = self.props;
+          const message = self.messageDOM;
+          const target = e?.target as HTMLInputElement;
           if (!rules) {
+            parentEventBus.emit('input', { name, value: target.value, isValid: true });
             return;
           }
           const nonValidRule = rules.find(
             (rule: Rule): boolean => rule.fn(target.value) !== true,
           );
+          parentEventBus.emit('input', { name, value: target.value, isValid: !nonValidRule });
           if (nonValidRule) {
-            message.setProps({
-              content: nonValidRule.text,
-            });
+            message.innerText = nonValidRule.text;
           }
         },
       },
@@ -61,7 +73,6 @@ export default class TextField extends Block {
 
     return compile(tmpl, {
       label: this.props.label,
-      message,
       input,
     });
   }
