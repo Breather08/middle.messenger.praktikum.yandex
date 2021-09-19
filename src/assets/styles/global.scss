@@ -1,13 +1,13 @@
-@import "./variables.scss";
-@import "../../components/text-field/index.scss";
-@import "../../components/chat-list/index.scss";
-@import "../../pages/chat/index.scss";
-@import "../../pages/login/index.scss";
-@import "../../pages/registration/index.scss";
+@import './variables.scss';
+@import '../../components/text-field/index.scss';
+@import '../../components/chat-list/index.scss';
+@import '../../pages/chat/index.scss';
+@import '../../pages/login/index.scss';
+@import '../../pages/registration/index.scss';
 
 @font-face {
   font-family: $default-font;
-  src: url("../fonts/gilroy-regular.ttf") format("truetype");
+  src: url('../fonts/gilroy-regular.ttf') format('truetype');
   font-display: swap;
   font-weight: normal;
   font-style: normal;
@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: $default-font;
-  src: url("../fonts/gilroy-bold.ttf") format("truetype");
+  src: url('../fonts/gilroy-bold.ttf') format('truetype');
   font-display: swap;
   font-weight: bold;
   font-style: bold;

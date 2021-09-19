@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import Input from './input';
+import Input from '../input';
 import { Rule } from '../../types/rules';
 import { EventBus, compile, Block } from '../../utils/index';
 import tmpl from './index.pug';

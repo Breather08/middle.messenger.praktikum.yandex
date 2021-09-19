@@ -1,0 +1,31 @@
+@import '../../assets/styles/variables.scss';
+
+.chat-actions {
+  display: flex;
+
+  &__input {
+    position: absolute;
+    bottom: 20px;
+    left: 40%;
+    transform: translate(-50%);
+
+    input {
+      font-family: $default-font;
+      height: 50px;
+      width: 40vw;
+      box-shadow: 0px 2px 2px 0px rgba(59, 59, 59, 0.5);
+      border-radius: 8px;
+      border: none;
+      padding: 0 20px;
+      background: white;
+      font-size: 16px;
+      outline: none;
+      transition: 0.2s;
+
+      &:focus {
+        outline: $success;
+        background: white;
+      }
+    }
+  }
+}

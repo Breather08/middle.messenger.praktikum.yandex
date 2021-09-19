@@ -11,14 +11,35 @@ export default class LoginPage extends Block {
   }
 
   render() {
+    const formData: Record<string, { value: string; isValid: boolean }> = {};
+    let formError = '';
+
+    this.eventBus().on('input', (payload) => {
+      const { name, value, isValid } = payload[0];
+      formData[name] = { value, isValid };
+    });
+
     const button = new Button({
       content: 'Авторизоваться',
       attrs: {
-        class: 'btn btn_block btn_success btn_bold btn_login',
+        class: 'btn btn_block btn_success btn_bold btn_registration',
       },
       events: {
         click() {
-          console.log('clicked');
+          const formEntries = Object.values(formData);
+          if (formEntries.length < 7) {
+            formError = 'Заполните все поля';
+            console.log(formError);
+            return;
+          }
+          formEntries.forEach((params) => {
+            if (params.isValid) {
+              formError = 'Убедитесь что поля заполнены верно';
+            }
+          });
+          if (!formError) {
+            console.log(formData);
+          }
         },
       },
     });

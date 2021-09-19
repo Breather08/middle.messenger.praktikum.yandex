@@ -20,7 +20,7 @@ export default class RegistrationPage extends Block {
     });
 
     const button = new Button({
-      content: 'Авторизоваться',
+      content: 'Зарегистрироваться',
       attrs: {
         class: 'btn btn_block btn_success btn_bold btn_registration',
       },
@@ -37,7 +37,11 @@ export default class RegistrationPage extends Block {
               formError = 'Убедитесь что поля заполнены верно';
             }
           });
-          console.log(formError);
+          if (!formError) {
+            console.log(formData);
+          } else {
+            alert(formError);
+          }
         },
       },
     });

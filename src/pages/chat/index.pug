@@ -3,12 +3,11 @@
     .sidebar__header
         .sidebar__header-menu 
             .img-container 
-                img(src="./assets/icons/burger-menu.svg", alt="burger-menu")
+                img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8giDTG5tei2jTQR1U9GODZF8LLv3uNtJjA&usqp=CAU", alt="burger-menu")
         .sidebar__header-search
-            .search 
-                input(type="text" id="chat-search" placeholder="Искать по чатам")
+            | !{input}
     hr
     .sidebar__content 
-        include ../../components/chat-list/index
-        +chatList 
-    .chat-window  
+        | !{chatListItem}
+.chat-window 
+    | !{chatActions}

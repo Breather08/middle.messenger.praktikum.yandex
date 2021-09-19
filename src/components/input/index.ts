@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import Block from '../../../utils/block';
+import Block from '../../utils/block';
 
 export default class Input extends Block {
   constructor(props: {

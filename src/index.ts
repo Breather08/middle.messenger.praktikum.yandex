@@ -1,5 +1,5 @@
 import './assets/styles/global.scss';
-import RegistrationPage from './pages/registration/index';
+import ChatPage from './pages/chat';
 import { Block } from './utils';
 
 function render(query: string, block: Block) {
@@ -10,6 +10,6 @@ function render(query: string, block: Block) {
   return root;
 }
 
-const loginPage = new RegistrationPage();
+const loginPage = new ChatPage();
 
 render('body', loginPage);
