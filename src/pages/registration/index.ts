@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+import './index.scss';
 import { Block, compile, rules, masks } from '../../utils/index';
 import Button from '../../components/button';
 import TextField from '../../components/text-field';
@@ -27,13 +28,13 @@ export default class RegistrationPage extends Block {
       events: {
         click() {
           const formEntries = Object.values(formData);
-          if (formEntries.length < 7) {
+          if (formEntries.length < 6) {
             formError = 'Заполните все поля';
-            console.log(formError);
+            alert(formError);
             return;
           }
           formEntries.forEach((params) => {
-            if (params.isValid) {
+            if (!params.isValid) {
               formError = 'Убедитесь что поля заполнены верно';
             }
           });
@@ -138,26 +139,26 @@ export default class RegistrationPage extends Block {
       ],
     });
 
-    const passwordRepeatTextField = new TextField({
-      label: 'Повторите пароль',
-      name: 'passwordRepeat',
-      parentEventBus: this.eventBus(),
-      inputAttrs: {
-        type: 'password',
-        autocomplete: 'off',
-        name: 'repeat-password',
-        id: 'registration-password-repeat',
-      },
-      rules: [
-        rules.nonEmpty(),
-        rules.noWhiteSpace(),
-        rules.length(8, 40),
-        rules.containsWord(),
-        rules.noSpecChars(),
-        rules.hasCapitalLetterAndNumber(),
-        rules.matchingPasswords(formData.password),
-      ],
-    });
+    // const passwordRepeatTextField = new TextField({
+    //   label: 'Повторите пароль',
+    //   name: 'passwordRepeat',
+    //   parentEventBus: this.eventBus(),
+    //   inputAttrs: {
+    //     type: 'password',
+    //     autocomplete: 'off',
+    //     name: 'repeat-password',
+    //     id: 'registration-password-repeat',
+    //   },
+    //   rules: [
+    //     rules.nonEmpty(),
+    //     rules.noWhiteSpace(),
+    //     rules.length(8, 40),
+    //     rules.containsWord(),
+    //     rules.noSpecChars(),
+    //     rules.hasCapitalLetterAndNumber(),
+    //     rules.matchingPasswords(formData.password?.value),
+    //   ],
+    // });
 
     return compile(tmpl, {
       button,
@@ -167,7 +168,7 @@ export default class RegistrationPage extends Block {
       lastNameTextField,
       phoneTextField,
       passwordTextField,
-      passwordRepeatTextField,
+      // passwordRepeatTextField,
     });
   }
 }

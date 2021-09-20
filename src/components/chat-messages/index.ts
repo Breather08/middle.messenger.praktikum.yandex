@@ -1,12 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import './index.scss';
 import { compile, Block } from '../../utils/index';
+import { Message } from '../../types/chat';
 import tmpl from './index.pug';
-
-type Message = {
-  text: string;
-  time: string;
-};
 
 export default class ChatMessages extends Block {
   constructor(props: {

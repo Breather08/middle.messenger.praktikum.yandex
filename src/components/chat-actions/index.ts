@@ -23,11 +23,11 @@ export default class ChatActions extends Block {
       attrs: this.props.inputAttrs,
       events: {
         keyup: (e: KeyboardEvent) => {
+          const target = e.target as HTMLInputElement;
+          message = target.value;
           if (e.key === 'Enter') {
             this.eventBus().emit('send-message');
           }
-          const target = e.target as HTMLInputElement;
-          message = target.value;
         },
       },
     });
@@ -36,7 +36,7 @@ export default class ChatActions extends Block {
       content: 'send',
       events: {
         click: () => {
-          this.eventBus().emit('send', message);
+          this.eventBus().emit('send-message', message);
         },
       },
     });
@@ -45,7 +45,9 @@ export default class ChatActions extends Block {
       const { parentEventBus } = this.props;
       const inputElement = input.element as HTMLInputElement;
       inputElement.value = '';
-      parentEventBus.emit('send', message);
+      if (message.length > 0) {
+        parentEventBus.emit('send', message);
+      }
     });
 
     return compile(tmpl, {

@@ -2,7 +2,9 @@
 
 .chat-actions {
   display: flex;
-  position: absolute;
+  position: fixed;
+  left: 50%;
+  transform: translate(-30%);
   bottom: 20px;
 
   &__input {
@@ -17,12 +19,6 @@
       background: white;
       font-size: 16px;
       outline: none;
-      transition: 0.2s;
-
-      &:focus {
-        outline: $success;
-        background: white;
-      }
     }
   }
 

@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+import './index.scss';
 import { Block, compile, rules } from '../../utils/index';
 import Button from '../../components/button';
 import TextField from '../../components/text-field';
@@ -7,7 +7,7 @@ import tmpl from './index.pug';
 export default class LoginPage extends Block {
   constructor() {
     super('div');
-    this.element.classList.add('auth-page__login d-flex align-center');
+    this.element.classList.add('auth-page__login');
   }
 
   render() {
@@ -27,18 +27,20 @@ export default class LoginPage extends Block {
       events: {
         click() {
           const formEntries = Object.values(formData);
-          if (formEntries.length < 7) {
+          if (formEntries.length < 2) {
             formError = 'Заполните все поля';
             console.log(formError);
             return;
           }
           formEntries.forEach((params) => {
-            if (params.isValid) {
+            if (!params.isValid) {
               formError = 'Убедитесь что поля заполнены верно';
             }
           });
           if (!formError) {
             console.log(formData);
+          } else {
+            alert(formError);
           }
         },
       },

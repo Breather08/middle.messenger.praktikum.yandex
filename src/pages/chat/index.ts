@@ -3,13 +3,9 @@ import { Block, compile } from '../../utils/index';
 import Input from '../../components/input';
 import ChatListItem from '../../components/chat-list-item';
 import ChatActions from '../../components/chat-actions';
-import tmpl from './index.pug';
 import ChatMessages from '../../components/chat-messages';
-
-type Message = {
-  text: string;
-  time: string;
-};
+import { Message } from '../../types/chat';
+import tmpl from './index.pug';
 
 export default class ChatPage extends Block {
   constructor() {

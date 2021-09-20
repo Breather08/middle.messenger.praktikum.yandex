@@ -1,11 +1,7 @@
-.auth-page {
+.auth-page__login {
   width: 100vw;
   height: 100vh;
-
-  &.active-page {
-    display: flex;
-  }
-
+  display: flex;
   justify-content: center;
   align-items: center;
 }

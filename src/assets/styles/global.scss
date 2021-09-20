@@ -4,6 +4,7 @@
 @import '../../pages/chat/index.scss';
 @import '../../pages/login/index.scss';
 @import '../../pages/registration/index.scss';
+@import '../../components/nav/index.scss';
 
 @font-face {
   font-family: $default-font;
@@ -31,6 +32,12 @@ body {
   background-color: $background;
   font-family: $default-font;
   font-weight: normal;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .bold {

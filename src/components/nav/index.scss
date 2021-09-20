@@ -1,0 +1,21 @@
+.navbar {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  z-index: 10;
+
+  ul {
+    display: flex;
+    background-color: $background;
+    list-style: none;
+
+    li {
+      padding: 5px 20px;
+      border-radius: 8px;
+      margin: 0 5px;
+    }
+  }
+}
