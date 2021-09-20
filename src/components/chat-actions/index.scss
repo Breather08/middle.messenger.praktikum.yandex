@@ -2,18 +2,15 @@
 
 .chat-actions {
   display: flex;
+  position: absolute;
+  bottom: 20px;
 
   &__input {
-    position: absolute;
-    bottom: 20px;
-    left: 40%;
-    transform: translate(-50%);
-
     input {
       font-family: $default-font;
       height: 50px;
       width: 40vw;
-      box-shadow: 0px 2px 2px 0px rgba(59, 59, 59, 0.5);
+      box-shadow: 0 2px 2px 0 rgba(59, 59, 59, 0.5);
       border-radius: 8px;
       border: none;
       padding: 0 20px;
@@ -26,6 +23,24 @@
         outline: $success;
         background: white;
       }
+    }
+  }
+
+  &__btn {
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+    box-shadow: 0 2px 2px 0 rgba(59, 59, 59, 0.5);
+    border-radius: 8px;
+    background-color: white;
+    overflow: hidden;
+
+    button {
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border: none;
+      background-color: $success;
     }
   }
 }

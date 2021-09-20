@@ -3,10 +3,12 @@ import './index.scss';
 import Input from '../input';
 import { EventBus, compile, Block } from '../../utils/index';
 import tmpl from './index.pug';
+import Button from '../button';
 
 export default class ChatActions extends Block {
   constructor(props: {
     parentEventBus: EventBus;
+    inputAttrs?: Record<string, string>;
     events?: Record<string, (e?: Event) => void>;
     attrs?: Record<string, string>;
   }) {
@@ -15,19 +17,41 @@ export default class ChatActions extends Block {
   }
 
   render() {
+    let message = '';
+
     const input = new Input({
       attrs: this.props.inputAttrs,
       events: {
-        input(e: InputEvent) {
+        keyup: (e: KeyboardEvent) => {
+          if (e.key === 'Enter') {
+            this.eventBus().emit('send-message');
+          }
           const target = e.target as HTMLInputElement;
-          this.props.parentEventBus.emit('input', target);
+          message = target.value;
         },
       },
+    });
+
+    const button = new Button({
+      content: 'send',
+      events: {
+        click: () => {
+          this.eventBus().emit('send', message);
+        },
+      },
+    });
+
+    this.eventBus().on('send-message', () => {
+      const { parentEventBus } = this.props;
+      const inputElement = input.element as HTMLInputElement;
+      inputElement.value = '';
+      parentEventBus.emit('send', message);
     });
 
     return compile(tmpl, {
       label: this.props.label,
       input,
+      button,
     });
   }
 }

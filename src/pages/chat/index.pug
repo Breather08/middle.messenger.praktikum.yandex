@@ -3,11 +3,12 @@
     .sidebar__header
         .sidebar__header-menu 
             .img-container 
-                img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8giDTG5tei2jTQR1U9GODZF8LLv3uNtJjA&usqp=CAU", alt="burger-menu")
+                img(src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAV1BMVEX///8AAACenp5hYWHPz88dHR3g4ODS0tKEhIQRERHv7+9BQUFERETExMQjIyM1NTWQkJD4+Pi6urp0dHQtLS1dXV3y8vJYWFiWlpZwcHDa2tp6enrp6ek7AyH4AAABbElEQVR4nO3dWU5CQRQE0GZQAUVFRRzY/zoVVmD1z02356ygKjzlmdyUrQEAAAAAAAAAAAAAAPA3d5vVODZ3cb/302Isp0NW8LytThzb7qKG99V5OzwkBffVabvsg4ar6rBdVkHDx+qwXR6DhjfVYbvcBA2fqsN2eQoaPleH7fIcNDxXh+1yDhq2ZXXaDsuk4IjPafKMXq3Heq25X6cFf92ux3Hb0Q8AAAAAAACAiRxeluN4Ca9LLz6qbw9CH+kHONqJ8GJxzBp+Vuft8JoU/KpO2+UraPhdHbbLd9DwrTpsl7eg4fwXtPN/hvP/HM7/u7S9VqftEH0ftnaszhsL32nGu4NO30vbP/jbAgAAAAAAAICZzL4TtR9s6yuZ9rzaVEeOhXtto92aXESbe2PuJiZDwuNtCl4kz+n8+6XzX9DOvyM8/xb0/Hve82+yt930u/rtMNqR8DG/MJ39/1sAAAAAAAAAAAAAAAD8Vz+xXS2AVeeEewAAAABJRU5ErkJggg==", alt="burger-menu")
         .sidebar__header-search
             | !{input}
     hr
     .sidebar__content 
         | !{chatListItem}
 .chat-window 
+    | !{chatMessages}
     | !{chatActions}
