@@ -1,0 +1,15 @@
+.chat-page 
+    .sidebar
+        a(href="#", id="logout") Выйти 
+        .sidebar__header
+            .sidebar__header-menu 
+                .img-container 
+                    img(src="./assets/icons/burger-menu.svg", alt="burger-menu")
+            .sidebar__header-search
+                .search 
+                    input(type="text" id="chat-search" placeholder="Искать по чатам")
+        hr
+        .sidebar__content 
+            include ../../components/chat-list/index
+            +chatList 
+    .chat-window  

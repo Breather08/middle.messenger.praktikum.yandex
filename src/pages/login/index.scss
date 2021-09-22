@@ -1,0 +1,10 @@
+.auth-page {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  &.active-page {
+    display: flex;
+  }
+  justify-content: center;
+  align-items: center;
+}

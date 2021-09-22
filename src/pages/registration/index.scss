@@ -1,0 +1,6 @@
+.registration-page {
+  display: none;
+  &.active-page {
+    display: block;
+  }
+}
