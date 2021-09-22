@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { v4 as makeUUID } from 'uuid';
+import { nanoid as makeUUID } from 'nanoid/non-secure';
 import { EventBus } from './eventBus';
 
 type Meta<P = any> = {
