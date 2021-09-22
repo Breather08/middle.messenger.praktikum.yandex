@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 .chat-page {
   display: flex;
 }
@@ -81,6 +83,10 @@
   }
 }
 
+.sidebar__content {
+  padding: 10px 0;
+}
+
 .sidebar__header {
   height: 80px;
   display: grid;
@@ -119,7 +125,6 @@
       padding: 0 20px;
       background: $grey;
       font-size: 16px;
-      outline: none;
       transition: 0.2s;
 
       &:focus {

@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+import './index.scss';
 import Input from '../input';
 import { Rule } from '../../types/rules';
 import { EventBus, compile, Block } from '../../utils/index';
@@ -37,24 +37,22 @@ export default class TextField extends Block {
 
   render() {
     const { rules } = this.props;
-    const self = this;
-
     const input = new Input({
       attrs: this.props.inputAttrs,
       events: {
-        input(e: InputEvent) {
+        input: (e: InputEvent) => {
           const target = e.target as HTMLInputElement;
-          if (self.props.mask) {
-            target.value = self.props.mask(target.value);
+          if (this.props.mask) {
+            target.value = this.props.mask(target.value);
           }
         },
-        focus() {
-          const message = self.messageDOM;
+        focus: () => {
+          const message = this.messageDOM;
           message.innerText = '';
         },
-        blur(e) {
-          const { parentEventBus, name } = self.props;
-          const message = self.messageDOM;
+        blur: (e) => {
+          const { parentEventBus, name } = this.props;
+          const message = this.messageDOM;
           const target = e?.target as HTMLInputElement;
           if (!rules) {
             parentEventBus.emit('input', { name, value: target.value, isValid: true });

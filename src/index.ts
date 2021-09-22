@@ -32,11 +32,9 @@ class App extends Block {
 
     const routeLinks = navbar.element.querySelectorAll('.router-link');
     routeLinks.forEach((link) => {
-      console.log(link);
       link.addEventListener('click', () => {
         const attrs = link.attributes as NamedNodeMap;
         const routeName = attrs.getNamedItem('route-name')?.value;
-        console.log(routeName);
         if (routeName === 'login') {
           currentPage.hide();
           loginPage.show();

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable class-methods-use-this */
 import { v4 as makeUUID } from 'uuid';
 import { EventBus } from './eventBus';
 
@@ -8,10 +7,25 @@ type Meta<P = any> = {
   props: P;
 };
 
+type Attributes = Record<string, string[] | string>;
+
+const initAttributes = (attributes: Attributes, element: HTMLElement) => {
+  Object.entries(attributes).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      if (key === 'classes') {
+        element.classList.add(...(value as string[]));
+      }
+    } else {
+      element.setAttribute(key, value);
+    }
+  });
+};
+
 export default class Block<P = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
+
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
   };
@@ -26,7 +40,7 @@ export default class Block<P = any> {
 
   public eventBus: () => EventBus;
 
-  constructor(tagName: string = 'div', props?: P) {
+  constructor(tagName: string = 'div', props?: P, attributes?: Attributes) {
     const eventBus = new EventBus();
     this.meta = {
       tagName,
@@ -39,6 +53,10 @@ export default class Block<P = any> {
 
     this.registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
+
+    if (attributes) {
+      initAttributes(attributes, this.element);
+    }
   }
 
   private registerEvents(eventBus: EventBus) {
@@ -142,18 +160,17 @@ export default class Block<P = any> {
   }
 
   private makePropsProxy(props: P): P {
-    const self = this;
     const oldProps = { ...props };
     return new Proxy(props as unknown as object, {
       get(target: Record<string, unknown>, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: Record<string, unknown>, prop: string, value: unknown) {
+      set: (target: Record<string, unknown>, prop: string, value: unknown) => {
         // eslint-disable-next-line no-param-reassign
         target[prop] = value;
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
         return true;
       },
       deleteProperty() {
@@ -167,10 +184,10 @@ export default class Block<P = any> {
   }
 
   show() {
-    this.getContent()!.style.display = 'flex';
+    this.getContent()!.classList.remove('hidden');
   }
 
   hide() {
-    this.getContent()!.style.display = 'none';
+    this.getContent()!.classList.add('hidden');
   }
 }

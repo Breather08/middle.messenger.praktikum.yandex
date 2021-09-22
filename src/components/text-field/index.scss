@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 .text-field {
   position: relative;
   width: 100%;
@@ -8,7 +10,7 @@
   &__label {
     position: absolute;
     transform: translate(15px, -8px);
-    padding: 0 6px 0 6px;
+    padding: 0 6px;
     background-color: white;
     font-size: 14px;
     transition: 0.2s linear;

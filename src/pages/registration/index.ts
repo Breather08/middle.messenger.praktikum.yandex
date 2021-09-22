@@ -1,19 +1,22 @@
-/* eslint-disable class-methods-use-this */
 import './index.scss';
-import { Block, compile, rules, masks } from '../../utils/index';
+import { Block, compile, rules, masks, validateForm } from '../../utils/index';
 import Button from '../../components/button';
 import TextField from '../../components/text-field';
 import tmpl from './index.pug';
 
 export default class RegistrationPage extends Block {
   constructor() {
-    super('div');
-    this.element.classList.add('auth-page__registration');
+    super(
+      'div',
+      {},
+      {
+        classes: ['auth-page__registration'],
+      },
+    );
   }
 
   render() {
     const formData: Record<string, { value: string; isValid: boolean }> = {};
-    let formError = '';
 
     this.eventBus().on('input', (payload) => {
       const { name, value, isValid } = payload[0];
@@ -27,22 +30,7 @@ export default class RegistrationPage extends Block {
       },
       events: {
         click() {
-          const formEntries = Object.values(formData);
-          if (formEntries.length < 6) {
-            formError = 'Заполните все поля';
-            alert(formError);
-            return;
-          }
-          formEntries.forEach((params) => {
-            if (!params.isValid) {
-              formError = 'Убедитесь что поля заполнены верно';
-            }
-          });
-          if (!formError) {
-            console.log(formData);
-          } else {
-            alert(formError);
-          }
+          validateForm(formData, 6);
         },
       },
     });

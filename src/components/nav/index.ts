@@ -1,20 +1,20 @@
+import './index.scss';
 import { Block, compile } from '../../utils';
+import { Route } from '../../types/routing';
 import LoginPage from '../../pages/login';
 import RegistrationPage from '../../pages/registration';
 import ChatPage from '../../pages/chat';
 import tmpl from './index.pug';
 
-type Route = {
-  path: string;
-  name: string;
-  title: string;
-  component: Block;
-};
-
 export default class NavBar extends Block {
   constructor() {
-    super('div');
-    this.element.classList.add('navbar');
+    super(
+      'div',
+      {},
+      {
+        classes: ['navbar'],
+      },
+    );
   }
 
   render() {

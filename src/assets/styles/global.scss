@@ -1,10 +1,4 @@
 @import './variables.scss';
-@import '../../components/text-field/index.scss';
-@import '../../components/chat-list/index.scss';
-@import '../../pages/chat/index.scss';
-@import '../../pages/login/index.scss';
-@import '../../pages/registration/index.scss';
-@import '../../components/nav/index.scss';
 
 @font-face {
   font-family: $default-font;
@@ -110,4 +104,8 @@ body {
       }
     }
   }
+}
+
+.hidden {
+  display: none !important;
 }

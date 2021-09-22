@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import './index.scss';
 import { compile, Block } from '../../utils/index';
 import { Message } from '../../types/chat';
@@ -10,8 +9,9 @@ export default class ChatMessages extends Block {
     events?: Record<string, (e?: Event) => void>;
     attrs?: Record<string, string>;
   }) {
-    super('div', props);
-    this.element.classList.add('chat-messages');
+    super('div', props, {
+      classes: ['chat-messages'],
+    });
   }
 
   render() {

@@ -1,5 +1,5 @@
 import Block from '../../utils/block';
-import fn from './index.pug';
+import tmpl from './index.pug';
 
 export default class Button extends Block {
   constructor(props: {
@@ -11,6 +11,6 @@ export default class Button extends Block {
   }
 
   render() {
-    return fn(this.props);
+    return tmpl(this.props);
   }
 }

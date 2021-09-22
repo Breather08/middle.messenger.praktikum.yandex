@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 .chat-messages {
   display: flex;
   flex-direction: column;
@@ -14,7 +16,7 @@
     max-width: 450px;
     word-wrap: break-word;
     justify-self: center;
-    background-color: #cecece;
+    background-color: $self-message-background;
 
     &__time {
       position: absolute;

@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+import './index.scss';
 import { Block, compile } from '../../utils/index';
 import Input from '../../components/input';
 import ChatListItem from '../../components/chat-list-item';
@@ -7,10 +7,18 @@ import ChatMessages from '../../components/chat-messages';
 import { Message } from '../../types/chat';
 import tmpl from './index.pug';
 
+const logoPlaceholder =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8giDTG5tei2jTQR1U9GODZF8LLv3uNtJjA&usqp=CAU';
+
 export default class ChatPage extends Block {
   constructor() {
-    super('div');
-    this.element.classList.add('chat-page');
+    super(
+      'div',
+      {},
+      {
+        classes: ['chat-page'],
+      },
+    );
   }
 
   render() {
@@ -37,7 +45,14 @@ export default class ChatPage extends Block {
       },
     });
 
-    const chatListItem = new ChatListItem();
+    const chatListItem = new ChatListItem({
+      title: 'Some title',
+      logo: logoPlaceholder,
+      lastMessage: {
+        time: '17:54',
+        text: 'Lorem ipsum dolar sit amet',
+      },
+    });
 
     const chatMessages = new ChatMessages({
       messages,
