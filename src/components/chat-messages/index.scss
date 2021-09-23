@@ -1,0 +1,28 @@
+@import '../../assets/styles/variables.scss';
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  justify-content: end;
+  align-items: flex-end;
+
+  .message {
+    position: relative;
+    margin: 2px;
+    padding: 10px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    max-width: 450px;
+    word-wrap: break-word;
+    justify-self: center;
+    background-color: $self-message-background;
+
+    &__time {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      color: grey;
+    }
+  }
+}

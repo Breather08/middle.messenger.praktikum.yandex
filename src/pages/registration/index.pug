@@ -1,18 +1,19 @@
-.auth-page.registration.active-page
-    .auth-card 
-        .auth-card__title
-            span Регистрация
-        .auth-card__fields 
-            include ../../components/text-field/index
-            +textField('Почта', 'email')
-            +textField('Логин')
-            +textField('Имя')
-            +textField('Фамилия', 'tel')
-            +textField('Телефон')
-            +textField('Пароль', 'password')
-            +textField('Пароль (еще раз)', 'password')
-        .auth-card__actions
-            button.btn.block.success.bold.registration-btn Зарегистрироваться
-            .additional 
-                a(href="#" id="has-account-link") Уже есть аккаунт?
+.auth-card 
+    .auth-card__title
+        span Регистрация
+    .auth-card__fields 
+        div.d-flex.align-center
+            | !{firstNameTextField}
+            | !{lastNameTextField}
+        | !{emailTextField}
+        div.d-flex.align-center
+            | !{phoneTextField}
+            | !{usernameTextField}
+        div.d-flex.align-center
+            | !{passwordTextField}
+            | !{passwordRepeatTextField}
+    .auth-card__actions
+        | !{button}
+        .additional
+            a(href="#" id="has-account-link") Уже есть аккаунт?
             
