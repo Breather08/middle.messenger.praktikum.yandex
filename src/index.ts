@@ -5,12 +5,11 @@ import RegistrationPage from './pages/registration';
 import NavBar from './components/nav';
 import { Block, compile } from './utils';
 import tmpl from './index.pug';
+import Router from './utils/router/router';
 
 function render(query: string, block: Block) {
   const root = document.querySelector(query);
-
   root?.append(block.element);
-
   return root;
 }
 
@@ -21,41 +20,10 @@ class App extends Block {
   }
 
   render() {
-    const loginPage = new LoginPage();
-    const registrationPage = new RegistrationPage();
-    const chatPage = new ChatPage();
     const navbar = new NavBar();
-
-    let currentPage = registrationPage;
-    loginPage.hide();
-    chatPage.hide();
-
-    const routeLinks = navbar.element.querySelectorAll('.router-link');
-    routeLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        const attrs = link.attributes as NamedNodeMap;
-        const routeName = attrs.getNamedItem('route-name')?.value;
-        if (routeName === 'login') {
-          currentPage.hide();
-          loginPage.show();
-          currentPage = loginPage;
-        } else if (routeName === 'registration') {
-          currentPage.hide();
-          registrationPage.show();
-          currentPage = registrationPage;
-        } else if (routeName === 'chat') {
-          currentPage.hide();
-          chatPage.show();
-          currentPage = chatPage;
-        }
-      });
-    });
 
     return compile(tmpl, {
       navbar,
-      loginPage,
-      registrationPage,
-      chatPage,
     });
   }
 }
@@ -63,3 +31,11 @@ class App extends Block {
 const app = new App();
 
 render('body', app);
+
+const router = new Router('.app');
+
+router
+  .use('/login', LoginPage)
+  .use('/chat', ChatPage)
+  .use('/registration', RegistrationPage)
+  .start();
